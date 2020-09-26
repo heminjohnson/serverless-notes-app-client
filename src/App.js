@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
-import "./App.css";
+
 import Routes from "./Routes";
+import { AppContext } from "./libs/contextLib";
+
+import "./App.css";
+
+const [isAuthenticated, userHasAuthenticated] = useState(false);
 
 function App() {
   return (
@@ -26,7 +31,9 @@ function App() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Routes />
+      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+        <Routes />
+      </AppContext.Provider>
     </div>
   );
 }
