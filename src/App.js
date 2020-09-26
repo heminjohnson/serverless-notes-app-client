@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 
 import Routes from "./Routes";
@@ -12,6 +12,7 @@ import "./App.css";
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     onLoad();
@@ -34,6 +35,8 @@ function App() {
     await Auth.signOut();
 
     userHasAuthenticated(false);
+
+    history.push("/login");
   }
 
   return (
